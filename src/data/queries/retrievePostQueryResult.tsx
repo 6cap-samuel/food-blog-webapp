@@ -1,6 +1,6 @@
 
 import { QueryObserverResult } from "react-query"
-import { RetrievePostResponse } from "../responses/posts/retrievePostResponse"
+import { RetrievePostResponseWrapper } from "../responses/posts/retrievePostResponse"
 
-export type RetrievePostQueryResult = QueryObserverResult<RetrievePostResponse | undefined, unknown>
+export type RetrievePostQueryResult = QueryObserverResult<RetrievePostResponseWrapper | undefined, unknown>
 
