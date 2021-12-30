@@ -1,6 +1,6 @@
 import React from 'react';
-import { Container } from '@mui/material';
-import { styled } from '@mui/system';
+import { Container, createTheme, CssBaseline } from '@mui/material';
+import { styled, ThemeProvider } from '@mui/system';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import './App.css';
 import BottomNavigationBar from './components/bottom_navigation_bar';
@@ -12,13 +12,24 @@ const Wrapper = styled(Container)({
 });
 
 function App() {
+  const darkTheme = createTheme({
+    palette: {
+      mode: 'dark',
+      secondary: {
+        main: '#FFF'
+      },
+    },
+  });
+
   const queryClient = new QueryClient();
   return (
     <QueryClientProvider client={queryClient}>
-      <Wrapper>
-        <Home />
-      </Wrapper>
-      <BottomNavigationBar />
+      <ThemeProvider theme={darkTheme}>
+        <Wrapper>
+          <Home />
+        </Wrapper>
+        <BottomNavigationBar />
+      </ThemeProvider>
     </QueryClientProvider>
   );
 }
