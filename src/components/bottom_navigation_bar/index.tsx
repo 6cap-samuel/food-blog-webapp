@@ -1,12 +1,8 @@
-import { IconButton, Toolbar } from '@mui/material';
+import { Toolbar } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Fab from '@mui/material/Fab';
-import Box from '@mui/material/Box';
-import MenuIcon from '@mui/icons-material/Menu';
 import AddIcon from '@mui/icons-material/Add';
-import SearchIcon from '@mui/icons-material/Search';
-import MoreIcon from '@mui/icons-material/MoreVert';
 
 const StyledFab = styled(Fab)({
   position: 'absolute',

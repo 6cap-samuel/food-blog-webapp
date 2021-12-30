@@ -8,7 +8,7 @@ const isProduction = process.env.NODE_ENV == "production";
 const stylesHandler = "style-loader";
 
 const config = {
-  entry: "./src/index.ts",
+  entry: "./src/index.js",
   output: {
     path: path.resolve(__dirname, "dist"),
   },
@@ -18,7 +18,7 @@ const config = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "index.html",
+      template: "./src/index.html",
     }),
 
     // Add your plugins here
@@ -39,7 +39,16 @@ const config = {
         test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
         type: "asset",
       },
-
+      {
+        test: /\.?js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ['@babel/preset-env', '@babel/preset-react']
+          }
+        }
+      },
       // Add your rules for custom modules here
       // Learn more about loaders from https://webpack.js.org/loaders/
     ],

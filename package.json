@@ -14,6 +14,7 @@
     "axios": "^0.24.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-progressive-loader": "^0.4.1",
     "react-query": "^3.34.7",
     "react-router-dom": "^6.2.1",
     "react-scripts": "^5.0.0",
@@ -26,7 +27,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "build:dev": "webpack --mode=development",
-    "build:prod": "webpack --mode=production --node-env=production",
+    "build:prod": "webpack --mode=production --node-env=production ",
     "watch": "webpack --watch",
     "serve": "webpack serve"
   },
@@ -49,7 +50,11 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.16.5",
+    "@babel/preset-env": "^7.16.5",
+    "@babel/preset-react": "^7.16.5",
     "@webpack-cli/generators": "^1.1.0",
+    "babel-loader": "^8.2.3",
     "css-loader": "^6.5.1",
     "html-webpack-plugin": "^5.5.0",
     "prettier": "^2.5.1",
