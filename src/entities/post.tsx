@@ -1,7 +1,8 @@
 export interface Post {
     id: string,
     description: string,
-    store: Store
+    store: Store,
+    rating: number
 }
 
 export interface Store {

@@ -8,7 +8,7 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/system';
 import { Img } from 'react-progressive-loader'
-import { CircularProgress } from '@mui/material';
+import { CircularProgress, Rating } from '@mui/material';
 
 const StyledCard = styled(Card)({
     top: -30,
@@ -26,6 +26,11 @@ const StyledLoader = styled(CircularProgress)({
     margin: '0 auto'
 });
 
+const StyledDiv = styled('div')({
+    margintop: '5px',
+    marginBottom: '10px'
+})
+
 const Home = () => {
     const postListing = usePostListing();
 
@@ -33,7 +38,8 @@ const Home = () => {
         imageUrl: string,
         title: string,
         content: string,
-        id: string
+        id: string,
+        rating: number
     ) => {
         return (
             <StyledCard key={id} sx={{ maxWidth: 500 }}>
@@ -45,6 +51,9 @@ const Home = () => {
                 }
                 <CardContent>
                     <Text variant={TypographyVariant.h5} text={title} />
+                    <StyledDiv>
+                        <Rating name="size-large" defaultValue={0} size="large" value={rating} />
+                    </StyledDiv>
                     <Text variant={TypographyVariant.body2} text={content} />
                 </CardContent>
                 <CardActions>
@@ -64,7 +73,8 @@ const Home = () => {
                             element.store.image_url,
                             element.store.name,
                             element.description,
-                            element.id
+                            element.id,
+                            element.rating
                         )
                     })
                 }
@@ -75,7 +85,7 @@ const Home = () => {
     if (postListing.isLoading) {
         return (
             <Fragment>
-                <StyledLoader/>
+                <StyledLoader />
             </Fragment>
         )
     }
