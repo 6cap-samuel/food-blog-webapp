@@ -9,6 +9,7 @@ import Button from '@mui/material/Button';
 import { styled } from '@mui/system';
 import { Img } from 'react-progressive-loader'
 import { CircularProgress, Rating } from '@mui/material';
+import Skeleton from '@mui/material/Skeleton';
 
 const StyledCard = styled(Card)({
     top: -30,
@@ -85,8 +86,12 @@ const Home = () => {
     if (postListing.isLoading) {
         return (
             <Fragment>
-                <StyledLoader />
+                <Skeleton variant="rectangular" width="100%" height={118} />
+                <Skeleton width="80%" />
+                <Skeleton width="60%"/>
+                <Skeleton variant="rectangular"height={200}/>
             </Fragment>
+
         )
     }
 }
