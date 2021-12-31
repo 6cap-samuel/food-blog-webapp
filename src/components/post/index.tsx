@@ -1,5 +1,5 @@
-import { Card, CardActionArea, CardActions, CardContent, Chip, Rating } from "@mui/material";
-import { fontSize, styled } from "@mui/system";
+import { Card, CardActions, CardContent, Chip, Rating } from "@mui/material";
+import { styled } from "@mui/system";
 import { Img } from "react-progressive-loader";
 import Text, { TypographyVariant } from "../text";
 
