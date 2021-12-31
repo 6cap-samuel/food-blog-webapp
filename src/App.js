@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import './App.css';
 import BottomNavigationBar from './components/bottom_navigation_bar';
 import Home from './screens/home';
+import PostTags from './components/post_tags';
 
 const Wrapper = styled(Container)({
   marginTop: '20px',

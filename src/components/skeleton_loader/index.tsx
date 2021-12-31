@@ -9,6 +9,7 @@ const StyledSkeletonLoader = styled(Skeleton)({
 const SkeletonLoader = () => {
     return (
         <Fragment>
+            <StyledSkeletonLoader variant="rectangular" width="100%" height={50} />
             <StyledSkeletonLoader variant="rectangular" width="100%" height={118} />
             <Skeleton width="80%" />
             <StyledSkeletonLoader width="60%" />

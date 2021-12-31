@@ -20,9 +20,9 @@ const BottomNavigationBar = () => {
           {/* <IconButton color="inherit" aria-label="open drawer">
             <MenuIcon />
           </IconButton> */}
-          <StyledFab color="secondary" aria-label="add">
+          {/* <StyledFab color="secondary" aria-label="add">
             <AddIcon />
-          </StyledFab>
+          </StyledFab> */}
           {/* <Box sx={{ flexGrow: 1 }} /> */}
           {/* <IconButton color="inherit">
             <SearchIcon />

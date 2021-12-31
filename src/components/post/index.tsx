@@ -57,7 +57,7 @@ const Post = (
             </CardContent>
             <StyledCardActions>
                 {props.hash_tags.map(tag => {
-                    return <StyledChip label={tag} size="small"/>
+                    return <StyledChip key={tag} label={tag} size="small"/>
                 })}
             </StyledCardActions>
         </StyledCard>
