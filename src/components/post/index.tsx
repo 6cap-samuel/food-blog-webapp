@@ -1,5 +1,5 @@
-import { Card, CardContent, Rating } from "@mui/material";
-import { styled } from "@mui/system";
+import { Card, CardActionArea, CardActions, CardContent, Chip, Rating } from "@mui/material";
+import { fontSize, styled } from "@mui/system";
 import { Img } from "react-progressive-loader";
 import Text, { TypographyVariant } from "../text";
 
@@ -20,12 +20,22 @@ const StyledDiv = styled('div')({
     marginBottom: '10px'
 })
 
+const StyledCardActions = styled(CardActions)({
+    display: 'block',
+    paddingBottom: '5px'
+})
+
+const StyledChip = styled(Chip)({
+    margin: '2px !important'
+})
+
 interface PostProps {
     imageUrl: string,
     title: string,
     content: string,
     id: string,
     rating: number
+    hash_tags: string[]
 }
 const Post = (
     props: PostProps
@@ -45,6 +55,11 @@ const Post = (
                 </StyledDiv>
                 <Text variant={TypographyVariant.body2} text={props.content} />
             </CardContent>
+            <StyledCardActions>
+                {props.hash_tags.map(tag => {
+                    return <StyledChip label={tag} size="small"/>
+                })}
+            </StyledCardActions>
         </StyledCard>
     )
 }

@@ -2,7 +2,8 @@ export interface Post {
     id: string,
     description: string,
     store: Store,
-    rating: number
+    rating: number,
+    hash_tags: string[]
 }
 
 export interface Store {
