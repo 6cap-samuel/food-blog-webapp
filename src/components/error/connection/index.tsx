@@ -17,6 +17,7 @@ const MiddleContainer = styled('div')({
 
 const StyledErrorIcon = styled(ErrorIcon)({
     height: '100%',
+    marginTop: '100%'
 })
 
 const ConnectionError = () => {
