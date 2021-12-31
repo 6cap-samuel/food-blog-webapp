@@ -2,7 +2,6 @@ import { Toolbar } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Fab from '@mui/material/Fab';
-import AddIcon from '@mui/icons-material/Add';
 
 const StyledFab = styled(Fab)({
   position: 'absolute',

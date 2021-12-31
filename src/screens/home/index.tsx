@@ -1,21 +1,20 @@
 
 import { Fragment, useState } from 'react';
 import { usePostListing } from '../../hooks/usePostListing';
-import SkeletonLoader from '../../components/skeleton_loader';
+import SkeletonLoader, { SkeletonType } from '../../components/skeleton_loader';
 import Post from '../../components/post';
 import ConnectionError from '../../components/error/connection';
 import EmptyDataset from '../../components/error/empty_dataset';
 import PostTags from '../../components/post_tags';
 import { styled } from '@mui/system';
-import { Post as PostEntity } from '../../entities/post';
 
 const StyledDiv = styled('div')({
     marginBottom: '10px'
 })
 
 const Home = () => {
-    const postListing = usePostListing();
     const [hashTagFilters, setHashTagFilters] = useState<string[]>([])
+    const postListing = usePostListing();
 
     if (postListing.isSuccess) {
         if (postListing.data.data.data === null ||
@@ -26,17 +25,10 @@ const Home = () => {
                 </Fragment>
             )
         } else {
-            const hashTagsList: string[] =
-                postListing.data.data.data.map(
-                    (post) => post.hash_tags
-                ).reduce(
-                    (a, b) => [...a, ...b], []
-                )
             return (
                 <Fragment>
                     <StyledDiv>
                         <PostTags
-                            options={hashTagsList}
                             setFilters={setHashTagFilters}
                         />
                     </StyledDiv>
@@ -58,7 +50,9 @@ const Home = () => {
         }
     } else if (postListing.isLoading) {
         return (
-            <SkeletonLoader />
+            <SkeletonLoader
+                type={SkeletonType.post}
+            />
         )
     } else {
         return (
