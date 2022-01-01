@@ -1,5 +1,5 @@
 
-import { Fragment, useCallback, useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { usePostListing } from '../../hooks/usePostListing';
 import SkeletonLoader, { SkeletonType } from '../../components/skeleton_loader';
 import Post from '../../components/post';
@@ -7,6 +7,7 @@ import ConnectionError from '../../components/error/connection';
 import EmptyDataset from '../../components/error/empty_dataset';
 import PostTags from '../../components/post_tags';
 import { styled } from '@mui/system';
+import { LinearProgress, Snackbar } from '@mui/material';
 
 const StyledDiv = styled('div')({
     marginBottom: '10px'
@@ -17,7 +18,6 @@ const Home = () => {
     const postListing = usePostListing(hashTagFilters);
 
     useEffect(() => {
-        console.log(hashTagFilters)
         postListing.refetch()
     }, [hashTagFilters])
 
@@ -36,6 +36,10 @@ const Home = () => {
                         <PostTags
                             setFilters={setHashTagFilters}
                         />
+                        {
+                            postListing.isRefetching &&
+                            <LinearProgress color="primary" />
+                        }
                     </StyledDiv>
                     {
                         postListing.data.data.data.map((element) => {
