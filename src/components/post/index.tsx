@@ -1,6 +1,8 @@
-import { Card, CardActions, CardContent, Chip, Rating } from "@mui/material";
+import { Avatar, AvatarGroup, Card, CardActions, CardContent, Chip, Rating } from "@mui/material";
 import { styled } from "@mui/system";
 import { Img } from "react-progressive-loader";
+import { Food } from "../../entities/food";
+import PostFood from "../post_food";
 import Text, { TypographyVariant } from "../text";
 
 const StyledCard = styled(Card)({
@@ -29,13 +31,18 @@ const StyledChip = styled(Chip)({
     margin: '2px !important'
 })
 
+const StyledAvatarGroup = styled(AvatarGroup)({
+    marginTop: 5
+})
+
 interface PostProps {
     imageUrl: string,
     title: string,
     content: string,
     id: string,
     rating: number
-    hash_tags: string[]
+    hash_tags: string[],
+    foods: Food[]
 }
 const Post = (
     props: PostProps
@@ -54,10 +61,22 @@ const Post = (
                     <Rating name="size-large" defaultValue={0} size="large" value={props.rating} />
                 </StyledDiv>
                 <Text variant={TypographyVariant.body2} text={props.content} />
+                <StyledAvatarGroup max={8}>
+                    {
+                        props.foods !== null && props.foods.map((element) => {
+                            return <Avatar
+                                alt={element.name}
+                                src={element.image_url}
+                                key={element.id}
+                                sx={{ width: 40, height: 40 }}
+                            />
+                        })
+                    }
+                </StyledAvatarGroup>
             </CardContent>
             <StyledCardActions>
                 {props.hash_tags.map(tag => {
-                    return <StyledChip key={tag} label={tag} size="small"/>
+                    return <StyledChip key={tag} label={tag} size="small" />
                 })}
             </StyledCardActions>
         </StyledCard>

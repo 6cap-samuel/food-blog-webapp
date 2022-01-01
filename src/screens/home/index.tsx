@@ -42,6 +42,7 @@ const Home = () => {
                                 id={element.id}
                                 rating={element.rating}
                                 hash_tags={element.hash_tags}
+                                foods={element.foods}
                             />
                         })
                     }
