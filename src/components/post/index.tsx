@@ -38,6 +38,7 @@ const StyledAvatarGroup = styled(AvatarGroup)({
 interface PostProps {
     imageUrl: string,
     title: string,
+    location: string,
     content: string,
     id: string,
     rating: number
@@ -57,6 +58,7 @@ const Post = (
             }
             <CardContent>
                 <Text variant={TypographyVariant.h5} text={props.title} />
+                <Text variant={TypographyVariant.h6} text={props.location} />
                 <StyledDiv>
                     <Rating name="size-large" defaultValue={0} size="large" value={props.rating} />
                 </StyledDiv>

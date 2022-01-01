@@ -42,11 +42,14 @@ const Home = () => {
                         }
                     </StyledDiv>
                     {
+
                         postListing.data.data.data.map((element) => {
+                            
                             return <Post
                                 key={element.id}
                                 imageUrl={element.store.image_url}
                                 title={element.store.name}
+                                location={element.store.location}
                                 content={element.description}
                                 id={element.id}
                                 rating={element.rating}
