@@ -3,9 +3,11 @@ import { RetrievePostQueryResult } from "../data/queries/retrievePostQueryResult
 import { retrieveAllPosts } from "../services/postService";
 import { RETRIEVE_ALL_POST_KEY } from "../utils/constants";
 
-export function usePostListing(): RetrievePostQueryResult {
+export function usePostListing(
+    filters: string[]
+): RetrievePostQueryResult {
     return useQuery(
-        [RETRIEVE_ALL_POST_KEY], 
-        () => retrieveAllPosts()
+        [RETRIEVE_ALL_POST_KEY],
+        () => retrieveAllPosts(filters)
     )
 }

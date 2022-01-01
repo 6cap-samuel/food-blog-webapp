@@ -1,5 +1,5 @@
 
-import { Fragment, useState } from 'react';
+import { Fragment, useCallback, useEffect, useState } from 'react';
 import { usePostListing } from '../../hooks/usePostListing';
 import SkeletonLoader, { SkeletonType } from '../../components/skeleton_loader';
 import Post from '../../components/post';
@@ -14,7 +14,12 @@ const StyledDiv = styled('div')({
 
 const Home = () => {
     const [hashTagFilters, setHashTagFilters] = useState<string[]>([])
-    const postListing = usePostListing();
+    const postListing = usePostListing(hashTagFilters);
+
+    useEffect(() => {
+        console.log(hashTagFilters)
+        postListing.refetch()
+    }, [hashTagFilters])
 
     if (postListing.isSuccess) {
         if (postListing.data.data.data === null ||

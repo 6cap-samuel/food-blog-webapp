@@ -1,11 +1,9 @@
 import React from 'react';
-import { Container, createTheme, CssBaseline } from '@mui/material';
+import { Container, createTheme } from '@mui/material';
 import { styled, ThemeProvider } from '@mui/system';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import './App.css';
-import BottomNavigationBar from './components/bottom_navigation_bar';
 import Home from './screens/home';
-import PostTags from './components/post_tags';
 
 const Wrapper = styled(Container)({
   marginTop: '20px',
@@ -29,7 +27,7 @@ function App() {
         <Wrapper>
           <Home />
         </Wrapper>
-        <BottomNavigationBar />
+        {/* <BottomNavigationBar /> */}
       </ThemeProvider>
     </QueryClientProvider>
   );

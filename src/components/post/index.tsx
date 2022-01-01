@@ -61,15 +61,18 @@ const Post = (
                     <Rating name="size-large" defaultValue={0} size="large" value={props.rating} />
                 </StyledDiv>
                 <Text variant={TypographyVariant.body2} text={props.content} />
-                <StyledAvatarGroup max={8}>
+                <StyledAvatarGroup max={7}>
                     {
                         props.foods !== null && props.foods.map((element) => {
-                            return <Avatar
-                                alt={element.name}
-                                src={element.image_url}
-                                key={element.id}
-                                sx={{ width: 40, height: 40 }}
-                            />
+                            return (
+                                <Avatar
+                                    alt={element.name}
+                                    src={element.image_url}
+                                    key={element.id}
+                                    sx={{ width: 40, height: 40 }}
+                                />
+                            )
+
                         })
                     }
                 </StyledAvatarGroup>
