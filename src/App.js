@@ -20,11 +20,19 @@ function App() {
     },
   });
 
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+      },
+    },
+  })
+  
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={darkTheme}>
         <Wrapper>
+          
           <Home />
         </Wrapper>
         {/* <BottomNavigationBar /> */}
