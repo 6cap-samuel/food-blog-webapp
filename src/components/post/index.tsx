@@ -3,6 +3,7 @@ import { styled } from "@mui/system";
 import { Img } from "react-progressive-loader";
 import { Food } from "../../entities/food";
 import Text, { TypographyVariant } from "../text";
+import { Fragment } from "react";
 
 const StyledCard = styled(Card)({
     top: -30,
@@ -43,6 +44,10 @@ const StyledButtonGroupItem = styled('li')({
     marginBottom: 1
 })
 
+const StyledText = styled(Text)({
+    display: 'inline !important'
+})
+
 interface PostProps {
     imageUrl: string,
     title: string,
@@ -74,42 +79,46 @@ const Post = (
                 </StyledDiv>
                 {
                     props.positive_reviews !== null &&
-                    <Text variant={TypographyVariant.h6} text={"Positives"} />
+                    <Fragment> 
+                        <StyledText variant={TypographyVariant.h6} text={"Positives"} />
+                    </Fragment>
                 }
                 <StyledBulletGroup>
                     {props.positive_reviews !== null
                         && props.positive_reviews.map((review) => {
                             return (
                                 <StyledButtonGroupItem>
-                                    <Text variant={TypographyVariant.body1} text={review} />
+                                    <Text variant={TypographyVariant.body2} text={review} />
                                 </StyledButtonGroupItem>
                             )
                         })}
                 </StyledBulletGroup>
                 {
                     props.neutral_reviews !== null &&
-                    <Text variant={TypographyVariant.h6} text={"Neutrals"} />
+                    <Fragment>
+                        <StyledText variant={TypographyVariant.h6} text={"Neutrals"} />
+                    </Fragment>
                 }
                 <StyledBulletGroup>
                     {props.neutral_reviews !== null
                         && props.neutral_reviews.map((review) => {
                             return (
                                 <StyledButtonGroupItem>
-                                    <Text variant={TypographyVariant.body1} text={review} />
+                                    <Text variant={TypographyVariant.body2} text={review} />
                                 </StyledButtonGroupItem>
                             )
                         })}
                 </StyledBulletGroup>
                 {
                     props.negative_reviews !== null &&
-                    <Text variant={TypographyVariant.h6} text={"Negatives"} />
+                    <StyledText variant={TypographyVariant.h6} text={"Negatives"} />
                 }
                 <StyledBulletGroup>
                     {props.negative_reviews !== null
                         && props.negative_reviews.map((review) => {
                             return (
                                 <StyledButtonGroupItem>
-                                    <Text variant={TypographyVariant.body1} text={review} />
+                                    <Text variant={TypographyVariant.body2} text={review} />
                                 </StyledButtonGroupItem>
                             )
                         })}
