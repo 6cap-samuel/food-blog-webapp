@@ -42,9 +42,7 @@ const Home = () => {
                         }
                     </StyledDiv>
                     {
-
                         postListing.data.data.data.map((element) => {
-                            
                             return <Post
                                 key={element.id}
                                 imageUrl={element.store.image_url}
@@ -55,6 +53,9 @@ const Home = () => {
                                 rating={element.rating}
                                 hash_tags={element.hash_tags}
                                 foods={element.foods}
+                                positive_reviews={element.positives}
+                                neutral_reviews={element.neutrals}
+                                negative_reviews={element.negatives}
                             />
                         })
                     }

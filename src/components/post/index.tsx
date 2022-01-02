@@ -2,7 +2,6 @@ import { Avatar, AvatarGroup, Card, CardActions, CardContent, Chip, Rating } fro
 import { styled } from "@mui/system";
 import { Img } from "react-progressive-loader";
 import { Food } from "../../entities/food";
-import PostFood from "../post_food";
 import Text, { TypographyVariant } from "../text";
 
 const StyledCard = styled(Card)({
@@ -35,6 +34,15 @@ const StyledAvatarGroup = styled(AvatarGroup)({
     marginTop: 5
 })
 
+const StyledBulletGroup = styled('ul')({
+    marginBottom: 3,
+    marginTop: 3
+})
+
+const StyledButtonGroupItem = styled('li')({
+    marginBottom: 1
+})
+
 interface PostProps {
     imageUrl: string,
     title: string,
@@ -43,7 +51,10 @@ interface PostProps {
     id: string,
     rating: number
     hash_tags: string[],
-    foods: Food[]
+    foods: Food[],
+    positive_reviews: string[],
+    negative_reviews: string[],
+    neutral_reviews: string[]
 }
 const Post = (
     props: PostProps
@@ -57,12 +68,58 @@ const Post = (
                 />
             }
             <CardContent>
-                <Text variant={TypographyVariant.h5} text={props.title} />
-                <Text variant={TypographyVariant.h6} text={props.location} />
+                <Text variant={TypographyVariant.h5} text={props.title + " @ " + props.location} />
                 <StyledDiv>
                     <Rating name="size-large" defaultValue={0} size="large" value={props.rating} />
                 </StyledDiv>
-                <Text variant={TypographyVariant.body2} text={props.content} />
+                {
+                    props.positive_reviews !== null &&
+                    <Text variant={TypographyVariant.h6} text={"Positives"} />
+                }
+                <StyledBulletGroup>
+                    {props.positive_reviews !== null
+                        && props.positive_reviews.map((review) => {
+                            return (
+                                <StyledButtonGroupItem>
+                                    <Text variant={TypographyVariant.body1} text={review} />
+                                </StyledButtonGroupItem>
+                            )
+                        })}
+                </StyledBulletGroup>
+                {
+                    props.neutral_reviews !== null &&
+                    <Text variant={TypographyVariant.h6} text={"Neutrals"} />
+                }
+                <StyledBulletGroup>
+                    {props.neutral_reviews !== null
+                        && props.neutral_reviews.map((review) => {
+                            return (
+                                <StyledButtonGroupItem>
+                                    <Text variant={TypographyVariant.body1} text={review} />
+                                </StyledButtonGroupItem>
+                            )
+                        })}
+                </StyledBulletGroup>
+                {
+                    props.negative_reviews !== null &&
+                    <Text variant={TypographyVariant.h6} text={"Negatives"} />
+                }
+                <StyledBulletGroup>
+                    {props.negative_reviews !== null
+                        && props.negative_reviews.map((review) => {
+                            return (
+                                <StyledButtonGroupItem>
+                                    <Text variant={TypographyVariant.body1} text={review} />
+                                </StyledButtonGroupItem>
+                            )
+                        })}
+                </StyledBulletGroup>
+                {
+                    props.positive_reviews === null &&
+                    props.neutral_reviews === null &&
+                    props.negative_reviews === null &&
+                    <Text variant={TypographyVariant.body2} text={props.content} />
+                }
                 <StyledAvatarGroup max={7}>
                     {
                         props.foods !== null && props.foods.map((element) => {

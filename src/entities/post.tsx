@@ -7,6 +7,9 @@ export interface Post {
     store: Store,
     rating: number,
     hash_tags: string[],
-    foods: Food[]
+    foods: Food[],
+    positives: string[],
+    neutrals: string[],
+    negatives: string[]
 }
 

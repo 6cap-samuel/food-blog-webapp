@@ -1,4 +1,5 @@
-export const BASE_URL = `https://samuel-food-blog-post-service.herokuapp.com`
+// export const BASE_URL = `https://samuel-food-blog-post-service.herokuapp.com`
+export const BASE_URL = `http://localhost:8081`
 export const POST_URL = `${BASE_URL}/post`
 export const HASHTAG_URL = `${BASE_URL}/hashtag`
 

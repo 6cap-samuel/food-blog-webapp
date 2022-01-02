@@ -27,12 +27,11 @@ function App() {
       },
     },
   })
-  
+
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={darkTheme}>
         <Wrapper>
-          
           <Home />
         </Wrapper>
         {/* <BottomNavigationBar /> */}
