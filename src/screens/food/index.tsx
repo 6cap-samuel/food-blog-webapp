@@ -13,7 +13,9 @@ const FoodScreen = () => {
     if (detailListing.isSuccess) {
         return (
             <PostDetailProvider
-                post={detailListing.data.data.data}>
+                post={detailListing.data.data.data}
+                isPostDetails={true}
+                >
                 <Post />
             </PostDetailProvider>
         )

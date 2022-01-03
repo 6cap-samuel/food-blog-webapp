@@ -11,20 +11,20 @@ const StyledDiv = styled('div')({
 
 const PostTitle = () => {
 
-    const post = useContext(PostDetailContext)
+    const postContext = useContext(PostDetailContext)
 
     return (
         <Fragment>
             <Text
                 variant={TypographyVariant.h5}
-                text={post.store.name + " @ " + post.store.location}
+                text={postContext.post.store.name + " @ " + postContext.post.store.location}
             />
             <StyledDiv>
                 <Rating
                     name="size-small"
                     defaultValue={0}
                     size="small"
-                    value={post.rating}
+                    value={postContext.post.rating}
                 />
             </StyledDiv>
         </Fragment>

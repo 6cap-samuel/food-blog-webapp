@@ -9,12 +9,12 @@ const StyledChip = styled(Chip)({
 
 const PostHashTags = () => {
 
-    const post = useContext(PostDetailContext)
+    const postContext = useContext(PostDetailContext)
 
     return (
         <Fragment>
             {
-                post.hash_tags.map(tag => {
+                postContext.post.hash_tags.map(tag => {
                     return <StyledChip
                         key={tag}
                         label={tag}

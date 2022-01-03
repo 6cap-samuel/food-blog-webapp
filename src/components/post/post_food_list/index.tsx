@@ -8,12 +8,13 @@ const StyledAvatarGroup = styled(AvatarGroup)({
 })
 
 const PostFoodList = () => {
-    const post = useContext(PostDetailContext)
+    const postContext = useContext(PostDetailContext)
 
     return (
         <StyledAvatarGroup max={7}>
             {
-                post.foods !== null && post.foods.map((food) => {
+                postContext.post.foods !== null
+                && postContext.post.foods.map((food) => {
                     return (
                         <Avatar
                             alt={food.name}

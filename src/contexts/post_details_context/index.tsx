@@ -1,7 +1,12 @@
 import { createContext } from "react";
 import { Post } from "../../entities/post";
 
-const init: Post = {
+type PostDetailContext = {
+   isPostDetails : boolean,
+   post: Post
+}
+
+const initPost: Post = {
     id: "",
     description: "",
     store: {
@@ -20,18 +25,28 @@ const init: Post = {
     negatives: []
 }
 
-const PostDetailContext = createContext<Post>(init)
+const init : PostDetailContext = {
+    isPostDetails: false,
+    post: initPost
+}
+
+const PostDetailContext = createContext<PostDetailContext>(init)
 
 interface PostDetailProviderProps {
     children: JSX.Element,
-    post: Post
+    post: Post,
+    isPostDetails: boolean
 }
 
 const PostDetailProvider = (
     props: PostDetailProviderProps
 ) => {
+    const postContext: PostDetailContext = {
+        post: props.post,
+        isPostDetails: props.isPostDetails
+    }
     return (
-        <PostDetailContext.Provider value={props.post}>
+        <PostDetailContext.Provider value={postContext}>
             {props.children}
         </PostDetailContext.Provider>
     )

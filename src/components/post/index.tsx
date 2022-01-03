@@ -28,13 +28,13 @@ const StyledCardActions = styled(CardActions)({
 
 const Post = () => {
 
-    const post = useContext(PostDetailContext)
+    const postContext = useContext(PostDetailContext)
 
     return (
-        <StyledCard key={post.id} sx={{ maxWidth: 500 }}>
-            {post.store.image_url !== '' &&
+        <StyledCard key={postContext.post.id} sx={{ maxWidth: 500 }}>
+            {postContext.post.store.image_url !== '' &&
                 <StyledImg
-                    src={post.store.image_url}
+                    src={postContext.post.store.image_url}
                     loadOnScreen={true}
                 />
             }
@@ -42,23 +42,23 @@ const Post = () => {
                 <PostTitle/>
                 <PostReview
                     title={"Positives"}
-                    reviews={post.positives}
+                    reviews={postContext.post.positives}
                 />
                 <PostReview
                     title={"Neutrals"}
-                    reviews={post.neutrals}
+                    reviews={postContext.post.neutrals}
                 />
                 <PostReview
                     title={"Negatives"}
-                    reviews={post.negatives}
+                    reviews={postContext.post.negatives}
                 />
                 {
-                    post.positives === null &&
-                    post.neutrals === null &&
-                    post.negatives === null &&
+                    postContext.post.positives === null &&
+                    postContext.post.neutrals === null &&
+                    postContext.post.negatives === null &&
                     <Text
                         variant={TypographyVariant.body2}
-                        text={post.description}
+                        text={postContext.post.description}
                     />
                 }
                 <PostFoodList/>

@@ -43,7 +43,9 @@ const Home = () => {
                             return (
                                 <Fragment key={post.id}>
                                     <PostDetailProvider
-                                        post={post}>
+                                        post={post}
+                                        isPostDetails={false}
+                                    >
                                         <Post />
                                     </PostDetailProvider>
                                 </Fragment>
