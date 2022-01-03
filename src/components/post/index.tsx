@@ -1,5 +1,5 @@
-import { Button, Card, CardActions, CardContent } from "@mui/material";
-import { styled } from "@mui/system";
+import { Button, Card, CardActions, CardContent, ImageList, ImageListItem, ImageListItemBar } from "@mui/material";
+import { styled, width } from "@mui/system";
 import { Img } from "react-progressive-loader";
 import Text, { TypographyVariant } from "../text";
 import PostReview from "./post_review";
@@ -59,7 +59,23 @@ const Post = () => {
                     text={postContext.post.description}
                 />
             }
-            <PostFoodList />
+            <ImageList sx={{height: 450 }}>
+                {postContext.post.foods.map((item) => (
+                    <ImageListItem key={item.image_url}>
+                        <img
+                            src={`${item.image_url}?w=248&fit=crop&auto=format`}
+                            srcSet={`${item.image_url}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                            alt={item.name}
+                            loading="lazy"
+                        />
+                        <ImageListItemBar
+                            title={item.name}
+                            subtitle={<span>${item.cost}</span>}
+                            position="below"
+                        />
+                    </ImageListItem>
+                ))}
+            </ImageList>
         </Fragment>)
     }
 
@@ -87,16 +103,17 @@ const Post = () => {
             <CardContent>
                 <PostTitle />
                 {
-                    postContext.isPostDetails ?
-                        renderDetails() :
-                        generateDetailsButtonLink()
+                    postContext.isPostDetails ? renderDetails() : <PostFoodList />
                 }
+                <PostHashTags />
             </CardContent>
-            {
-                postContext.isPostDetails && <StyledCardActions>
-                    <PostHashTags />
-                </StyledCardActions>
-            }
+            <StyledCardActions>
+                {
+                    !postContext.isPostDetails && generateDetailsButtonLink()
+
+                }
+            </StyledCardActions>
+
         </StyledCard>
     )
 }
