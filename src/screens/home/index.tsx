@@ -5,7 +5,7 @@ import SkeletonLoader, { SkeletonType } from '../../components/skeleton_loader';
 import Post from '../../components/post';
 import ConnectionError from '../../components/error/connection';
 import EmptyDataset from '../../components/error/empty_dataset';
-import PostTags from '../../components/post_tags';
+import PostTags from '../../components/post/post_tags';
 import { styled } from '@mui/system';
 import { LinearProgress, Snackbar } from '@mui/material';
 

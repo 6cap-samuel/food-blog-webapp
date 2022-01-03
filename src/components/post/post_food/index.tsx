@@ -1,6 +1,6 @@
 import { Avatar } from "@mui/material";
 import { Fragment } from "react";
-import { Food } from "../../entities/food";
+import { Food } from "../../../entities/food";
 
 interface PostFoodProps {
     foodList: Food[]

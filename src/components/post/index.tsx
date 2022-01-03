@@ -1,10 +1,12 @@
-import { Avatar, AvatarGroup, Card, CardActions, CardContent, Chip, Rating } from "@mui/material";
+import { Card, CardActions, CardContent, Chip, Rating } from "@mui/material";
 import { styled } from "@mui/system";
 import { Img } from "react-progressive-loader";
 import { Food } from "../../entities/food";
 import Text, { TypographyVariant } from "../text";
-import PostReview from "../post_review";
-import PostFoodList from "../post_food_list";
+import PostReview from "./post_review";
+import PostFoodList from "./post_food_list";
+import PostHashTags from "./post_hash_tags";
+import PostTitle from "./post_title";
 
 const StyledCard = styled(Card)({
     top: -30,
@@ -18,19 +20,12 @@ const StyledImg = styled(Img)({
     height: 150,
 });
 
-const StyledDiv = styled('div')({
-    margintop: '5px',
-    marginBottom: '10px'
-})
 
 const StyledCardActions = styled(CardActions)({
     display: 'block',
     paddingBottom: '5px'
 })
 
-const StyledChip = styled(Chip)({
-    margin: '2px !important'
-})
 
 interface PostProps {
     imageUrl: string,
@@ -57,10 +52,11 @@ const Post = (
                 />
             }
             <CardContent>
-                <Text variant={TypographyVariant.h5} text={props.title + " @ " + props.location} />
-                <StyledDiv>
-                    <Rating name="size-small" defaultValue={0} size="small" value={props.rating} />
-                </StyledDiv>
+                <PostTitle
+                    title={props.title}
+                    location={props.location}
+                    rating={props.rating}
+                />
                 <PostReview
                     title={"Positives"}
                     reviews={props.positive_reviews}
@@ -84,9 +80,9 @@ const Post = (
                 />
             </CardContent>
             <StyledCardActions>
-                {props.hash_tags.map(tag => {
-                    return <StyledChip key={tag} label={tag} size="small" />
-                })}
+                <PostHashTags
+                    hash_tags={props.hash_tags}
+                />
             </StyledCardActions>
         </StyledCard>
     )

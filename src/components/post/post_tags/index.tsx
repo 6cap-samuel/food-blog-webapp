@@ -1,7 +1,8 @@
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
-import { useHashtagListing } from '../../hooks/useHashtagListing';
-import SkeletonLoader, { SkeletonType } from '../skeleton_loader';
+import { Fragment } from 'react';
+import { useHashtagListing } from '../../../hooks/useHashtagListing';
+import SkeletonLoader, { SkeletonType } from '../../skeleton_loader';
 
 interface PostTagsProps {
     setFilters: React.Dispatch<React.SetStateAction<string[]>>
@@ -36,7 +37,7 @@ const PostTags = (props: PostTagsProps) => {
             />
         )
     } else {
-        return <></>
+        return <Fragment/>
     }
 }
 

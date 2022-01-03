@@ -1,6 +1,6 @@
 import { styled } from "@mui/system";
 import { Fragment } from "react";
-import Text, { TypographyVariant } from "../text";
+import Text, { TypographyVariant } from "../../text";
 
 const StyledText = styled(Text)({
     display: 'inline !important'

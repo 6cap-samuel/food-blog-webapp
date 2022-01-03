@@ -1,6 +1,6 @@
 import { Avatar, AvatarGroup } from "@mui/material"
 import { styled } from "@mui/system"
-import { Food } from "../../entities/food"
+import { Food } from "../../../entities/food"
 
 const StyledAvatarGroup = styled(AvatarGroup)({
     marginTop: 5
