@@ -4,7 +4,8 @@ import { useContext } from "react"
 import { PostDetailContext } from "../../../contexts/post_details_context"
 
 const StyledAvatarGroup = styled(AvatarGroup)({
-    marginTop: 5
+    marginTop: 5,
+    marginBottom: 10
 })
 
 const PostFoodList = () => {

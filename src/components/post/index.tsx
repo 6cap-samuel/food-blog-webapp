@@ -22,11 +22,6 @@ const StyledImg = styled(Img)({
     height: 150,
 });
 
-const StyledCardActions = styled(CardActions)({
-    display: 'block',
-    paddingBottom: '5px'
-})
-
 const StyledButton = styled(Button)({
     float: 'right',
     marginBottom: '13px'
@@ -59,14 +54,13 @@ const Post = () => {
                     text={postContext.post.description}
                 />
             }
-            <ImageList sx={{height: 450 }}>
+            <ImageList sx={{ height: 450 }}>
                 {postContext.post.foods.map((item) => (
                     <ImageListItem key={item.image_url}>
-                        <img
-                            src={`${item.image_url}?w=248&fit=crop&auto=format`}
-                            srcSet={`${item.image_url}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                        <StyledImg
+                            src={item.image_url}
                             alt={item.name}
-                            loading="lazy"
+                            loadOnScreen={true}
                         />
                         <ImageListItemBar
                             title={item.name}
@@ -106,13 +100,11 @@ const Post = () => {
                     postContext.isPostDetails ? renderDetails() : <PostFoodList />
                 }
                 <PostHashTags />
-            </CardContent>
-            <StyledCardActions>
                 {
                     !postContext.isPostDetails && generateDetailsButtonLink()
 
                 }
-            </StyledCardActions>
+            </CardContent>
 
         </StyledCard>
     )
