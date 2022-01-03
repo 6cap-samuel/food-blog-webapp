@@ -15,7 +15,11 @@ const PostHashTags = () => {
         <Fragment>
             {
                 post.hash_tags.map(tag => {
-                    return <StyledChip key={tag} label={tag} size="small" />
+                    return <StyledChip
+                        key={tag}
+                        label={tag}
+                        size="small"
+                    />
                 })
             }
         </Fragment>

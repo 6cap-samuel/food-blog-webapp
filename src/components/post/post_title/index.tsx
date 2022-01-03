@@ -15,9 +15,17 @@ const PostTitle = () => {
 
     return (
         <Fragment>
-            <Text variant={TypographyVariant.h5} text={post.store.name + " @ " + post.store.location} />
+            <Text
+                variant={TypographyVariant.h5}
+                text={post.store.name + " @ " + post.store.location}
+            />
             <StyledDiv>
-                <Rating name="size-small" defaultValue={0} size="small" value={post.rating} />
+                <Rating
+                    name="size-small"
+                    defaultValue={0}
+                    size="small"
+                    value={post.rating}
+                />
             </StyledDiv>
         </Fragment>
     )

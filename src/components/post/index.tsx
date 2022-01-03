@@ -1,7 +1,6 @@
-import { Card, CardActions, CardContent, Chip, Rating } from "@mui/material";
+import { Card, CardActions, CardContent} from "@mui/material";
 import { styled } from "@mui/system";
 import { Img } from "react-progressive-loader";
-import { Food } from "../../entities/food";
 import Text, { TypographyVariant } from "../text";
 import PostReview from "./post_review";
 import PostFoodList from "./post_food_list";

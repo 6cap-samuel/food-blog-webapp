@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import '@fontsource/roboto/300.css';
@@ -9,9 +8,57 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import FoodScreen from './screens/food';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ThemeProvider } from '@emotion/react';
+import { Container, createTheme } from '@mui/material';
+import { PostProvider } from './contexts/post_context';
+import Home from './screens/home';
+import { styled } from '@mui/system';
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  },
+})
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+    secondary: {
+      main: '#FFF'
+    },
+  },
+});
+
+const Wrapper = styled(Container)({
+  marginTop: '20px',
+  marginBottom: '80px'
+});
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={darkTheme}>
+        <Wrapper>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={
+                <PostProvider>
+                  <Home />
+                </PostProvider>
+              } />
+              <Route path="/food" element={
+                <FoodScreen />
+              } />
+            </Routes>
+          </BrowserRouter>
+        </Wrapper>
+      </ThemeProvider>
+    </QueryClientProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -2,7 +2,6 @@ import { Avatar, AvatarGroup } from "@mui/material"
 import { styled } from "@mui/system"
 import { useContext } from "react"
 import { PostDetailContext } from "../../../contexts/post_details_context"
-import { Food } from "../../../entities/food"
 
 const StyledAvatarGroup = styled(AvatarGroup)({
     marginTop: 5
