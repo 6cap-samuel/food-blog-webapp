@@ -1,6 +1,6 @@
 import { Post } from "../../../entities/post";
 
-export interface RetrievePostResponseWrapper{
+export interface RetrievePostResponseWrapper {
     data: RetrievePostResponse
 }
 
@@ -9,4 +9,3 @@ export interface RetrievePostResponse {
     status: string,
     data: Post[]
 }
-

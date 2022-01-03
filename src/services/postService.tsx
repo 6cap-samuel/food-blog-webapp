@@ -15,3 +15,10 @@ export const retrieveAllPosts = (
     )
 }
 
+export const retrievePostDetails = (
+    postId: string
+) => {
+    return get<EmptyRequest, RetrievePostResponse>(
+        `${POST_URL}/${postId}`
+    )
+}

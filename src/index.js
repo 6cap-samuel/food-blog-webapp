@@ -51,9 +51,9 @@ ReactDOM.render(
                   <Home />
                 </PostProvider>
               } />
-              <Route path="/food" element={
-                <FoodScreen />
-              } />
+              <Route path="/food">
+                <Route path=":postId" element={<FoodScreen/>}/>
+              </Route>
             </Routes>
           </BrowserRouter>
         </Wrapper>
