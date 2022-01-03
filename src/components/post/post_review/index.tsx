@@ -32,7 +32,7 @@ const PostReview = (props: PostReviewProps) => {
                 <StyledBulletGroup>
                     {props.reviews.map((review) => {
                             return (
-                                <StyledButtonGroupItem>
+                                <StyledButtonGroupItem key={review}>
                                     <Text variant={TypographyVariant.body2} text={review} />
                                 </StyledButtonGroupItem>
                             )

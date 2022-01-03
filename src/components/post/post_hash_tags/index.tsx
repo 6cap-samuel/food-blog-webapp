@@ -1,19 +1,20 @@
 import { Chip } from "@mui/material"
 import { styled } from "@mui/system"
-import { Fragment } from "react"
+import { Fragment, useContext } from "react"
+import { PostDetailContext } from "../../../contexts/post_details_context"
 
 const StyledChip = styled(Chip)({
     margin: '2px !important'
 })
 
-interface PostHashTagsProps {
-    hash_tags: string[]
-}
-const PostHashTags = (props: PostHashTagsProps) => {
+const PostHashTags = () => {
+
+    const post = useContext(PostDetailContext)
+
     return (
         <Fragment>
             {
-                props.hash_tags.map(tag => {
+                post.hash_tags.map(tag => {
                     return <StyledChip key={tag} label={tag} size="small" />
                 })
             }

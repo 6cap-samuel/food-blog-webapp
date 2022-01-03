@@ -1,25 +1,23 @@
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
-import { Fragment } from 'react';
-import { useHashtagListing } from '../../../hooks/useHashtagListing';
+import { Fragment, useContext } from 'react';
+import { PostContext } from '../../../contexts/post_context';
+import { FilteredPostResult } from '../../../hooks/ui/usePosts';
 import SkeletonLoader, { SkeletonType } from '../../skeleton_loader';
 
-interface PostTagsProps {
-    setFilters: React.Dispatch<React.SetStateAction<string[]>>
-}
+const PostTags = () => {
+    const {hashtagApiListing, setHashtags} = useContext<FilteredPostResult>(PostContext)
 
-const PostTags = (props: PostTagsProps) => {
-    const hashtagListing = useHashtagListing()
-    if (hashtagListing.isSuccess) {
+    if (hashtagApiListing.isSuccess) {
         const hashTagsList: string[] =
-            hashtagListing.data.data.data.map((a) => a.name)
+            hashtagApiListing.data.data.data.map((a) => a.name)
         return (
             <Autocomplete
                 multiple
                 limitTags={8}
                 id="tags-outlined"
                 options={hashTagsList}
-                onChange={(event, value) => props.setFilters(value)}
+                onChange={(event, value) => setHashtags(value)}
                 filterSelectedOptions
                 renderInput={(params) => (
                     <TextField
@@ -30,7 +28,7 @@ const PostTags = (props: PostTagsProps) => {
                 )}
             />
         );
-    } else if (hashtagListing.isLoading){
+    } else if (hashtagApiListing.isLoading){
         return (
             <SkeletonLoader
                 type={SkeletonType.search}

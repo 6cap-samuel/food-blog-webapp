@@ -1,25 +1,25 @@
 import { Avatar, AvatarGroup } from "@mui/material"
 import { styled } from "@mui/system"
+import { useContext } from "react"
+import { PostDetailContext } from "../../../contexts/post_details_context"
 import { Food } from "../../../entities/food"
 
 const StyledAvatarGroup = styled(AvatarGroup)({
     marginTop: 5
 })
 
-interface PostFoodList{
-    foods: Food[]
-}
+const PostFoodList = () => {
+    const post = useContext(PostDetailContext)
 
-const PostFoodList = (props: PostFoodList) => {
     return (
         <StyledAvatarGroup max={7}>
             {
-                props.foods !== null && props.foods.map((element) => {
+                post.foods !== null && post.foods.map((food) => {
                     return (
                         <Avatar
-                            alt={element.name}
-                            src={element.image_url}
-                            key={element.id}
+                            alt={food.name}
+                            src={food.image_url}
+                            key={food.id}
                             sx={{ width: 40, height: 40 }}
                         />
                     )

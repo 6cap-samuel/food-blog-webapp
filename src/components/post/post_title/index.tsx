@@ -1,6 +1,7 @@
 import { Rating } from "@mui/material";
 import { styled } from "@mui/system";
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
+import { PostDetailContext } from "../../../contexts/post_details_context";
 import Text, { TypographyVariant } from "../../text";
 
 const StyledDiv = styled('div')({
@@ -8,18 +9,15 @@ const StyledDiv = styled('div')({
     marginBottom: '10px'
 })
 
-interface PostTitleProps {
-    title: string,
-    location: string,
-    rating: number
-}
+const PostTitle = () => {
 
-const PostTitle = (props: PostTitleProps) => {
+    const post = useContext(PostDetailContext)
+
     return (
         <Fragment>
-            <Text variant={TypographyVariant.h5} text={props.title + " @ " + props.location} />
+            <Text variant={TypographyVariant.h5} text={post.store.name + " @ " + post.store.location} />
             <StyledDiv>
-                <Rating name="size-small" defaultValue={0} size="small" value={props.rating} />
+                <Rating name="size-small" defaultValue={0} size="small" value={post.rating} />
             </StyledDiv>
         </Fragment>
     )

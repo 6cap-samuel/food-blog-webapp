@@ -1,29 +1,28 @@
 
-import { Fragment, useEffect, useState } from 'react';
-import { usePostListing } from '../../hooks/usePostListing';
+import { Fragment, useContext, useEffect, useState } from 'react';
+import { usePostListing } from '../../hooks/api/usePostListing';
 import SkeletonLoader, { SkeletonType } from '../../components/skeleton_loader';
 import Post from '../../components/post';
 import ConnectionError from '../../components/error/connection';
 import EmptyDataset from '../../components/error/empty_dataset';
 import PostTags from '../../components/post/post_tags';
 import { styled } from '@mui/system';
-import { LinearProgress, Snackbar } from '@mui/material';
+import { LinearProgress } from '@mui/material';
+import { PostContext } from '../../contexts/post_context';
+import { FilteredPostResult } from '../../hooks/ui/usePosts';
+import { PostDetailProvider } from '../../contexts/post_details_context';
 
 const StyledDiv = styled('div')({
     marginBottom: '10px'
 })
 
 const Home = () => {
-    const [hashTagFilters, setHashTagFilters] = useState<string[]>([])
-    const postListing = usePostListing(hashTagFilters);
+    const { postApiListing }
+        = useContext<FilteredPostResult>(PostContext)
 
-    useEffect(() => {
-        postListing.refetch()
-    }, [hashTagFilters])
-
-    if (postListing.isSuccess) {
-        if (postListing.data.data.data === null ||
-            postListing.data.data.data.map.length === 0) {
+    if (postApiListing.isSuccess) {
+        if (postApiListing.data.data.data === null ||
+            postApiListing.data.data.data.map.length === 0) {
             return (
                 <Fragment>
                     <EmptyDataset />
@@ -33,36 +32,28 @@ const Home = () => {
             return (
                 <Fragment>
                     <StyledDiv>
-                        <PostTags
-                            setFilters={setHashTagFilters}
-                        />
+                        <PostTags />
                         {
-                            postListing.isRefetching &&
+                            postApiListing.isRefetching &&
                             <LinearProgress color="primary" />
                         }
                     </StyledDiv>
                     {
-                        postListing.data.data.data.map((element) => {
-                            return <Post
-                                key={element.id}
-                                imageUrl={element.store.image_url}
-                                title={element.store.name}
-                                location={element.store.location}
-                                content={element.description}
-                                id={element.id}
-                                rating={element.rating}
-                                hash_tags={element.hash_tags}
-                                foods={element.foods}
-                                positive_reviews={element.positives}
-                                neutral_reviews={element.neutrals}
-                                negative_reviews={element.negatives}
-                            />
+                        postApiListing.data.data.data.map((post) => {
+                            return (
+                                <Fragment key={post.id}>
+                                    <PostDetailProvider
+                                        post={post}>
+                                        <Post />
+                                    </PostDetailProvider>
+                                </Fragment>
+                            )
                         })
                     }
                 </Fragment>
             )
         }
-    } else if (postListing.isLoading) {
+    } else if (postApiListing.isLoading) {
         return (
             <SkeletonLoader
                 type={SkeletonType.post}

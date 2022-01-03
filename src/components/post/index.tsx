@@ -7,6 +7,8 @@ import PostReview from "./post_review";
 import PostFoodList from "./post_food_list";
 import PostHashTags from "./post_hash_tags";
 import PostTitle from "./post_title";
+import { useContext } from "react";
+import { PostDetailContext } from "../../contexts/post_details_context";
 
 const StyledCard = styled(Card)({
     top: -30,
@@ -20,69 +22,50 @@ const StyledImg = styled(Img)({
     height: 150,
 });
 
-
 const StyledCardActions = styled(CardActions)({
     display: 'block',
     paddingBottom: '5px'
 })
 
+const Post = () => {
 
-interface PostProps {
-    imageUrl: string,
-    title: string,
-    location: string,
-    content: string,
-    id: string,
-    rating: number
-    hash_tags: string[],
-    foods: Food[],
-    positive_reviews: string[],
-    negative_reviews: string[],
-    neutral_reviews: string[]
-}
-const Post = (
-    props: PostProps
-) => {
+    const post = useContext(PostDetailContext)
+
     return (
-        <StyledCard key={props.id} sx={{ maxWidth: 500 }}>
-            {props.imageUrl !== '' &&
+        <StyledCard key={post.id} sx={{ maxWidth: 500 }}>
+            {post.store.image_url !== '' &&
                 <StyledImg
-                    src={props.imageUrl}
+                    src={post.store.image_url}
                     loadOnScreen={true}
                 />
             }
             <CardContent>
-                <PostTitle
-                    title={props.title}
-                    location={props.location}
-                    rating={props.rating}
-                />
+                <PostTitle/>
                 <PostReview
                     title={"Positives"}
-                    reviews={props.positive_reviews}
+                    reviews={post.positives}
                 />
                 <PostReview
                     title={"Neutrals"}
-                    reviews={props.neutral_reviews}
+                    reviews={post.neutrals}
                 />
                 <PostReview
                     title={"Negatives"}
-                    reviews={props.negative_reviews}
+                    reviews={post.negatives}
                 />
                 {
-                    props.positive_reviews === null &&
-                    props.neutral_reviews === null &&
-                    props.negative_reviews === null &&
-                    <Text variant={TypographyVariant.body2} text={props.content} />
+                    post.positives === null &&
+                    post.neutrals === null &&
+                    post.negatives === null &&
+                    <Text
+                        variant={TypographyVariant.body2}
+                        text={post.description}
+                    />
                 }
-                <PostFoodList
-                    foods={props.foods}
-                />
+                <PostFoodList/>
             </CardContent>
             <StyledCardActions>
-                <PostHashTags
-                    hash_tags={props.hash_tags}
-                />
+                <PostHashTags/>
             </StyledCardActions>
         </StyledCard>
     )

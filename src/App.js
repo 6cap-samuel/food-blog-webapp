@@ -4,6 +4,7 @@ import { styled, ThemeProvider } from '@mui/system';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import './App.css';
 import Home from './screens/home';
+import { PostContext, PostProvider } from './contexts/post_context';
 
 const Wrapper = styled(Container)({
   marginTop: '20px',
@@ -32,7 +33,9 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={darkTheme}>
         <Wrapper>
-          <Home />
+          <PostProvider>
+            <Home />
+          </PostProvider>
         </Wrapper>
         {/* <BottomNavigationBar /> */}
       </ThemeProvider>
