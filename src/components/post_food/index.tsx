@@ -9,15 +9,15 @@ interface PostFoodProps {
 const PostFood = (props: PostFoodProps) => {
     if (props.foodList !== null) {
         props.foodList.map((element) => {
-            return<Avatar
+            return <Avatar
                 alt={element.name}
                 src={element.image_url}
                 key={element.id}
                 sx={{ width: 56, height: 56 }}
             />
         })
-    }else {
-        return <></>
+    } else {
+        return <Fragment />
     }
 }
 

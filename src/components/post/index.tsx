@@ -3,7 +3,8 @@ import { styled } from "@mui/system";
 import { Img } from "react-progressive-loader";
 import { Food } from "../../entities/food";
 import Text, { TypographyVariant } from "../text";
-import { Fragment } from "react";
+import PostReview from "../post_review";
+import PostFoodList from "../post_food_list";
 
 const StyledCard = styled(Card)({
     top: -30,
@@ -29,23 +30,6 @@ const StyledCardActions = styled(CardActions)({
 
 const StyledChip = styled(Chip)({
     margin: '2px !important'
-})
-
-const StyledAvatarGroup = styled(AvatarGroup)({
-    marginTop: 5
-})
-
-const StyledBulletGroup = styled('ul')({
-    marginBottom: 3,
-    marginTop: 3
-})
-
-const StyledButtonGroupItem = styled('li')({
-    marginBottom: 1
-})
-
-const StyledText = styled(Text)({
-    display: 'inline !important'
 })
 
 interface PostProps {
@@ -75,75 +59,29 @@ const Post = (
             <CardContent>
                 <Text variant={TypographyVariant.h5} text={props.title + " @ " + props.location} />
                 <StyledDiv>
-                    <Rating name="size-large" defaultValue={0} size="large" value={props.rating} />
+                    <Rating name="size-small" defaultValue={0} size="small" value={props.rating} />
                 </StyledDiv>
-                {
-                    props.positive_reviews !== null &&
-                    <Fragment> 
-                        <StyledText variant={TypographyVariant.h6} text={"Positives"} />
-                    </Fragment>
-                }
-                <StyledBulletGroup>
-                    {props.positive_reviews !== null
-                        && props.positive_reviews.map((review) => {
-                            return (
-                                <StyledButtonGroupItem>
-                                    <Text variant={TypographyVariant.body2} text={review} />
-                                </StyledButtonGroupItem>
-                            )
-                        })}
-                </StyledBulletGroup>
-                {
-                    props.neutral_reviews !== null &&
-                    <Fragment>
-                        <StyledText variant={TypographyVariant.h6} text={"Neutrals"} />
-                    </Fragment>
-                }
-                <StyledBulletGroup>
-                    {props.neutral_reviews !== null
-                        && props.neutral_reviews.map((review) => {
-                            return (
-                                <StyledButtonGroupItem>
-                                    <Text variant={TypographyVariant.body2} text={review} />
-                                </StyledButtonGroupItem>
-                            )
-                        })}
-                </StyledBulletGroup>
-                {
-                    props.negative_reviews !== null &&
-                    <StyledText variant={TypographyVariant.h6} text={"Negatives"} />
-                }
-                <StyledBulletGroup>
-                    {props.negative_reviews !== null
-                        && props.negative_reviews.map((review) => {
-                            return (
-                                <StyledButtonGroupItem>
-                                    <Text variant={TypographyVariant.body2} text={review} />
-                                </StyledButtonGroupItem>
-                            )
-                        })}
-                </StyledBulletGroup>
+                <PostReview
+                    title={"Positives"}
+                    reviews={props.positive_reviews}
+                />
+                <PostReview
+                    title={"Neutrals"}
+                    reviews={props.neutral_reviews}
+                />
+                <PostReview
+                    title={"Negatives"}
+                    reviews={props.negative_reviews}
+                />
                 {
                     props.positive_reviews === null &&
                     props.neutral_reviews === null &&
                     props.negative_reviews === null &&
                     <Text variant={TypographyVariant.body2} text={props.content} />
                 }
-                <StyledAvatarGroup max={7}>
-                    {
-                        props.foods !== null && props.foods.map((element) => {
-                            return (
-                                <Avatar
-                                    alt={element.name}
-                                    src={element.image_url}
-                                    key={element.id}
-                                    sx={{ width: 40, height: 40 }}
-                                />
-                            )
-
-                        })
-                    }
-                </StyledAvatarGroup>
+                <PostFoodList
+                    foods={props.foods}
+                />
             </CardContent>
             <StyledCardActions>
                 {props.hash_tags.map(tag => {

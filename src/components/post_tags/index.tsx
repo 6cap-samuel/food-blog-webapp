@@ -1,7 +1,6 @@
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import { useHashtagListing } from '../../hooks/useHashtagListing';
-import { useEffect, useState } from 'react';
 import SkeletonLoader, { SkeletonType } from '../skeleton_loader';
 
 interface PostTagsProps {
