@@ -54,22 +54,25 @@ const Post = () => {
                     text={postContext.post.description}
                 />
             }
-            <ImageList sx={{ height: 450 }}>
-                {postContext.post.foods.map((item) => (
-                    <ImageListItem key={item.image_url}>
-                        <StyledImg
-                            src={item.image_url}
-                            alt={item.name}
-                            loadOnScreen={true}
-                        />
-                        <ImageListItemBar
-                            title={item.name}
-                            subtitle={<span>${item.cost}</span>}
-                            position="below"
-                        />
-                    </ImageListItem>
-                ))}
-            </ImageList>
+            {
+                postContext.post.foods !== null &&
+                <ImageList sx={{ height: 250 }}>
+                    {postContext.post.foods.map((item) => (
+                        <ImageListItem key={item.image_url}>
+                            <StyledImg
+                                src={item.image_url}
+                                alt={item.name}
+                                loadOnScreen={true}
+                            />
+                            <ImageListItemBar
+                                title={item.name}
+                                subtitle={<span>${item.cost}</span>}
+                                position="below"
+                            />
+                        </ImageListItem>
+                    ))}
+                </ImageList>
+            }
         </Fragment>)
     }
 
