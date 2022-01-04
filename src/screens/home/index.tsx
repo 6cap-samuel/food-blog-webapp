@@ -1,6 +1,5 @@
 
-import { Fragment, useContext, useEffect, useState } from 'react';
-import { usePostListing } from '../../hooks/api/usePostListing';
+import { Fragment, useContext } from 'react';
 import SkeletonLoader, { SkeletonType } from '../../components/skeleton_loader';
 import Post from '../../components/post';
 import ConnectionError from '../../components/error/connection';

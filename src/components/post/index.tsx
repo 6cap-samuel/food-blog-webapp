@@ -9,6 +9,7 @@ import PostTitle from "./post_title";
 import { Fragment, useContext } from "react";
 import { PostDetailContext } from "../../contexts/post_details_context";
 import { Link } from "react-router-dom";
+import { Food } from "../../entities/food";
 
 const StyledCard = styled(Card)({
     top: -30,
@@ -30,6 +31,32 @@ const StyledButton = styled(Button)({
 const Post = () => {
 
     const postContext = useContext(PostDetailContext)
+
+    const renderImageListItem = (
+        item: Food
+    ) => {
+        return (<ImageListItem key={item.image_url}>
+            <StyledImg
+                src={item.image_url}
+                alt={item.name}
+                loadOnScreen={true}
+            />
+            <ImageListItemBar
+                title={item.name}
+                subtitle={<span>${item.cost}</span>}
+                position="below"
+            />
+        </ImageListItem>)
+    }
+
+    const renderImageList = () => {
+        return postContext.post.foods !== null &&
+            <ImageList sx={{ height: 250 }}>
+                {postContext.post.foods.map((item) => (
+                    renderImageListItem(item)
+                ))}
+            </ImageList>
+    }
 
     const renderDetails = () => {
         return (<Fragment>
@@ -55,23 +82,7 @@ const Post = () => {
                 />
             }
             {
-                postContext.post.foods !== null &&
-                <ImageList sx={{ height: 250 }}>
-                    {postContext.post.foods.map((item) => (
-                        <ImageListItem key={item.image_url}>
-                            <StyledImg
-                                src={item.image_url}
-                                alt={item.name}
-                                loadOnScreen={true}
-                            />
-                            <ImageListItemBar
-                                title={item.name}
-                                subtitle={<span>${item.cost}</span>}
-                                position="below"
-                            />
-                        </ImageListItem>
-                    ))}
-                </ImageList>
+                renderImageList()
             }
         </Fragment>)
     }
