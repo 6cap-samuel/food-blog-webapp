@@ -14,6 +14,7 @@ const PostHashTags = () => {
     return (
         <Fragment>
             {
+                postContext.post.hash_tags !== null &&
                 postContext.post.hash_tags.map(tag => {
                     return <StyledChip
                         key={tag}

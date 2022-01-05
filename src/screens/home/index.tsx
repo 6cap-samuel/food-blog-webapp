@@ -6,7 +6,7 @@ import ConnectionError from '../../components/error/connection';
 import EmptyDataset from '../../components/error/empty_dataset';
 import PostTags from '../../components/post/post_tags';
 import { styled } from '@mui/system';
-import { LinearProgress } from '@mui/material';
+import { Container, LinearProgress } from '@mui/material';
 import { PostContext } from '../../contexts/post_context';
 import { FilteredPostResult } from '../../hooks/ui/usePosts';
 import { PostDetailProvider } from '../../contexts/post_details_context';
@@ -14,6 +14,10 @@ import { PostDetailProvider } from '../../contexts/post_details_context';
 const StyledDiv = styled('div')({
     marginBottom: '10px'
 })
+
+const Wrapper = styled(Container)({
+    marginTop: '20px !important'
+});
 
 const Home = () => {
     const { postApiListing }
@@ -30,27 +34,29 @@ const Home = () => {
         } else {
             return (
                 <Fragment>
-                    <StyledDiv>
-                        <PostTags />
+                    <Wrapper>
+                        <StyledDiv>
+                            <PostTags />
+                            {
+                                postApiListing.isRefetching &&
+                                <LinearProgress color="primary" />
+                            }
+                        </StyledDiv>
                         {
-                            postApiListing.isRefetching &&
-                            <LinearProgress color="primary" />
+                            postApiListing.data.data.data.map((post) => {
+                                return (
+                                    <Fragment key={post.id}>
+                                        <PostDetailProvider
+                                            post={post}
+                                            isPostDetails={false}
+                                        >
+                                            <Post />
+                                        </PostDetailProvider>
+                                    </Fragment>
+                                )
+                            })
                         }
-                    </StyledDiv>
-                    {
-                        postApiListing.data.data.data.map((post) => {
-                            return (
-                                <Fragment key={post.id}>
-                                    <PostDetailProvider
-                                        post={post}
-                                        isPostDetails={false}
-                                    >
-                                        <Post />
-                                    </PostDetailProvider>
-                                </Fragment>
-                            )
-                        })
-                    }
+                    </Wrapper>
                 </Fragment>
             )
         }

@@ -34,9 +34,7 @@ const darkTheme = createTheme({
   },
 });
 
-const Wrapper = styled(Container)({
-  marginTop: '20px',
-  marginBottom: '80px'
+const Wrapper = styled('div')({
 });
 
 ReactDOM.render(
