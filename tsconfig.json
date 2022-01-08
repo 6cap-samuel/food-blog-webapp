@@ -9,7 +9,6 @@
       "noImplicitAny": true,
       "allowSyntheticDefaultImports": true,
       "allowJs": true
-
   },
   "exclude": [
       "dist"
