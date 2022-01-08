@@ -10,9 +10,10 @@ import '@fontsource/roboto/700.css';
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import FoodScreen from './screens/food';
+import AdminScreen from './screens/admin';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ThemeProvider } from '@emotion/react';
-import { Container, createTheme } from '@mui/material';
+import { createTheme } from '@mui/material';
 import { PostProvider } from './contexts/post_context';
 import Home from './screens/home';
 import { styled } from '@mui/system';
@@ -50,8 +51,14 @@ ReactDOM.render(
                 </PostProvider>
               } />
               <Route path="/food">
-                <Route path=":postId" element={<FoodScreen/>}/>
+                <Route path=":postId" element={<FoodScreen />} />
               </Route>
+              <Route
+                path="/admin"
+                element={
+                  <AdminScreen />
+                }
+              />
             </Routes>
           </BrowserRouter>
         </Wrapper>
