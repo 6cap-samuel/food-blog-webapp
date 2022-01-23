@@ -1,4 +1,4 @@
-export const BASE_URL = `http://api.henhaochi.io`
+export const BASE_URL = `https://api.henhaochi.io`
 
 export const POST_URL = `${BASE_URL}/posts`
 export const HASHTAG_URL = `${BASE_URL}/hashtags`
