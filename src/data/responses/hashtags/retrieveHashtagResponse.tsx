@@ -5,8 +5,6 @@ export interface RetrieveHashtagResponseWrapper{
 }
 
 export interface RetrieveHashtagResponse {
-    code: number,
-    status: string,
-    data: Hashtag[]
+    hashtags: Hashtag[]
 }
 

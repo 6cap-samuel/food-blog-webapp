@@ -10,7 +10,7 @@ const PostTags = () => {
 
     if (hashtagApiListing.isSuccess) {
         const hashTagsList: string[] =
-            hashtagApiListing.data.data.data.map((a) => a.name)
+            hashtagApiListing.data.data.hashtags.map((a) => a.name)
         return (
             <Autocomplete
                 multiple
