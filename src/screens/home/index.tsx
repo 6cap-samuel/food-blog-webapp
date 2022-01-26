@@ -4,7 +4,6 @@ import SkeletonLoader, { SkeletonType } from '../../components/skeleton_loader';
 import Post from '../../components/post';
 import ConnectionError from '../../components/error/connection';
 import EmptyDataset from '../../components/error/empty_dataset';
-import PostTags from '../../components/post/post_tags';
 import { styled } from '@mui/system';
 import { Container, LinearProgress } from '@mui/material';
 import { PostContext } from '../../contexts/post_context';
@@ -16,8 +15,15 @@ const StyledDiv = styled('div')({
 })
 
 const Wrapper = styled(Container)({
-    marginTop: '20px !important'
+    marginTop: '5px !important'
 });
+
+
+const SkeletonLoaderWrapper = styled('div')({
+    margin: '0 auto',
+    width: '500px'
+})
+
 
 const Home = () => {
     const { postApiListing }
@@ -36,7 +42,6 @@ const Home = () => {
                 <Fragment>
                     <Wrapper>
                         <StyledDiv>
-                            <PostTags />
                             {
                                 postApiListing.isRefetching &&
                                 <LinearProgress color="primary" />
@@ -62,9 +67,13 @@ const Home = () => {
         }
     } else if (postApiListing.isLoading) {
         return (
-            <SkeletonLoader
-                type={SkeletonType.post}
-            />
+            <Fragment>
+                <SkeletonLoaderWrapper>
+                    <SkeletonLoader
+                        type={SkeletonType.post}
+                    />
+                </SkeletonLoaderWrapper>
+            </Fragment>
         )
     } else {
         return (
