@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Menu from '@mui/material/Menu';
 import Text, { TypographyVariant } from '../text';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Alert, Button, Modal, TextField } from '@mui/material';
 import { useLogin } from '../../hooks/api/useLogin';
 
@@ -48,6 +48,12 @@ const NavBar = () => {
         password
     )
 
+    useMemo(() => {
+        if(loginMutation.isSuccess){
+            setOpen(false)
+        }
+    }, [loginMutation.isSuccess])
+
     const modal = () => {
         return <Modal
             keepMounted
@@ -82,8 +88,10 @@ const NavBar = () => {
                     value={password}
                     onChange={(a) => setPassword(a.target.value)}
                 />
-                <LoginButton variant="outlined"
-                    onClick={() => loginMutation.mutate()}>Login</LoginButton>
+                <LoginButton
+                    variant="outlined"
+                    onClick={() => loginMutation.mutate()
+                }>Login</LoginButton>
             </Box>
         </Modal>
     }
@@ -117,9 +125,6 @@ const NavBar = () => {
         </StyledMenu>
     );
 
-    if (loginMutation.isSuccess){ 
-        handleClose()
-    }
     return (
         <Box sx={{ flexGrow: 1 }}>
             <Toolbar>
