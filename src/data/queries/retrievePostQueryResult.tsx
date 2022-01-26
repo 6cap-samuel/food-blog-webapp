@@ -12,6 +12,6 @@ export type RetrievePostQueryResult
     = QueryObserverResult<RetrievePostResponseWrapper | undefined, unknown>
 export type RetrieveHashtagQueryResult
     = QueryObserverResult<RetrieveHashtagResponseWrapper | undefined, unknown>
-
+    
 export type LoginMutationResult
     = UseMutationResult<AxiosResponse<EmptyResponse> | undefined, unknown, void, unknown>

@@ -47,7 +47,7 @@ const NavBar = () => {
         username,
         password
     )
-    
+
     const modal = () => {
         return <Modal
             keepMounted
@@ -117,8 +117,9 @@ const NavBar = () => {
         </StyledMenu>
     );
 
-    console.log(loginMutation.isSuccess)
-
+    if (loginMutation.isSuccess){ 
+        handleClose()
+    }
     return (
         <Box sx={{ flexGrow: 1 }}>
             <Toolbar>
