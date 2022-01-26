@@ -17,6 +17,7 @@ import { createTheme } from '@mui/material';
 import { PostProvider } from './contexts/post_context';
 import Home from './screens/home';
 import { styled } from '@mui/system';
+import NavBar from './components/top_nav_bar';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -28,9 +29,9 @@ const queryClient = new QueryClient({
 
 const darkTheme = createTheme({
   palette: {
-    mode: 'dark',
+    mode: 'light',
     secondary: {
-      main: '#FFF'
+      main: '#000'
     },
   },
 });
@@ -43,6 +44,7 @@ ReactDOM.render(
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={darkTheme}>
         <Wrapper>
+          <NavBar/>
           <BrowserRouter>
             <Routes>
               <Route path="/" element={
