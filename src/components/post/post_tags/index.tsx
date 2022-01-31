@@ -6,7 +6,8 @@ import { FilteredPostResult } from '../../../hooks/ui/usePosts';
 import SkeletonLoader, { SkeletonType } from '../../skeleton_loader';
 
 const PostTags = () => {
-    const {hashtagApiListing, setHashtags} = useContext<FilteredPostResult>(PostContext)
+    const { hashtagApiListing, setHashtags }
+        = useContext<FilteredPostResult>(PostContext)
 
     if (hashtagApiListing.isSuccess) {
         const hashTagsList: string[] =
@@ -28,14 +29,14 @@ const PostTags = () => {
                 )}
             />
         );
-    } else if (hashtagApiListing.isLoading){
+    } else if (hashtagApiListing.isLoading) {
         return (
             <SkeletonLoader
                 type={SkeletonType.search}
             />
         )
     } else {
-        return <Fragment/>
+        return <Fragment />
     }
 }
 

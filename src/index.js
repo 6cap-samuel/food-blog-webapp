@@ -18,6 +18,8 @@ import { PostProvider } from './contexts/post_context';
 import Home from './screens/home';
 import { styled } from '@mui/system';
 import NavBar from './components/top_nav_bar';
+import { AdminProvider, RequireAuth } from './contexts/admin_context';
+import BottomNavigationBar from './components/bottom_navigation_bar/index';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -30,8 +32,12 @@ const queryClient = new QueryClient({
 const darkTheme = createTheme({
   palette: {
     mode: 'light',
+    primary: {
+      main: '#000',
+      light: '#DDD'
+    },
     secondary: {
-      main: '#000'
+      main: '#EEE'
     },
   },
 });
@@ -43,27 +49,32 @@ ReactDOM.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={darkTheme}>
-        <Wrapper>
-          <NavBar/>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={
-                <PostProvider>
-                  <Home />
-                </PostProvider>
-              } />
-              <Route path="/food">
-                <Route path=":postId" element={<FoodScreen />} />
-              </Route>
-              <Route
-                path="/admin"
-                element={
-                  <AdminScreen />
-                }
-              />
-            </Routes>
-          </BrowserRouter>
-        </Wrapper>
+        <AdminProvider>
+          <Wrapper>
+            <BrowserRouter>
+              <NavBar />
+              <Routes>
+                <Route path="/" element={
+                  <PostProvider>
+                    <Home />
+                  </PostProvider>
+                } />
+                <Route path="/food">
+                  <Route path=":postId" element={<FoodScreen />} />
+                </Route>
+                <Route
+                  path="/admin"
+                  element={
+                    <RequireAuth>
+                      <AdminScreen />
+                    </RequireAuth>
+                  }
+                />
+              </Routes>
+              <BottomNavigationBar />
+            </BrowserRouter>
+          </Wrapper>
+        </AdminProvider>
       </ThemeProvider>
     </QueryClientProvider>
   </React.StrictMode>,

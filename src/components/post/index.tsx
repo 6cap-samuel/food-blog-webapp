@@ -1,4 +1,4 @@
-import { Button, Card, CardActions, CardContent, ImageList, ImageListItem, ImageListItemBar } from "@mui/material";
+import { Breadcrumbs, Button, Card, CardActions, CardContent, ImageList, ImageListItem, ImageListItemBar } from "@mui/material";
 import { styled, width } from "@mui/system";
 import { Img } from "react-progressive-loader";
 import Text, { TypographyVariant } from "../text";
@@ -101,26 +101,29 @@ const Post = () => {
     }
 
     return (
-        <StyledCard key={postContext.post.id} sx={{ maxWidth: 500 }}>
-            {postContext.post.store.image_url !== '' &&
-                <StyledImg
-                    src={postContext.post.store.image_url}
-                    loadOnScreen={true}
-                />
-            }
-            <CardContent>
-                <PostTitle />
-                {
-                    postContext.isPostDetails ? renderDetails() : <PostFoodList />
+        <Fragment>
+            <StyledCard key={postContext.post.id} sx={{ maxWidth: 500 }}>
+                {postContext.post.store.image_url !== '' &&
+                    <StyledImg
+                        src={postContext.post.store.image_url}
+                        loadOnScreen={true}
+                    />
                 }
-                <PostHashTags />
-                {
-                    !postContext.isPostDetails && generateDetailsButtonLink()
+                <CardContent>
+                    <PostTitle />
+                    {
+                        postContext.isPostDetails ? renderDetails() : <PostFoodList />
+                    }
+                    <PostHashTags />
+                    {
+                        !postContext.isPostDetails && generateDetailsButtonLink()
 
-                }
-            </CardContent>
+                    }
+                </CardContent>
 
-        </StyledCard>
+            </StyledCard>
+        </Fragment>
+
     )
 }
 

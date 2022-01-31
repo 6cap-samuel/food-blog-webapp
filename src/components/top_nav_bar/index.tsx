@@ -1,11 +1,12 @@
-import { styled, alpha } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Menu from '@mui/material/Menu';
-import Text, { TypographyVariant } from '../text';
-import { useMemo, useState } from 'react';
+import { useContext, useMemo, useState } from 'react';
 import { Alert, Button, Modal, TextField } from '@mui/material';
 import { useLogin } from '../../hooks/api/useLogin';
+import Title from '../title';
+import { AdminContext, AdminType } from '../../contexts/admin_context';
 
 const StyledMenu = styled(Menu)({
     display: 'fixed'
@@ -37,36 +38,42 @@ const StyledAlert = styled(Alert)({
 })
 
 const NavBar = () => {
-    const [open, setOpen] = useState(false);
+    const [open, setOpen]
+        = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
+    const [username, setUsername]
+        = useState("");
+    const [password, setPassword]
+        = useState("");
 
     const loginMutation = useLogin(
         username,
         password
     )
 
+    const { isAdmin, setIsAdmin }
+        = useContext<AdminType>(AdminContext);
+
     useMemo(() => {
-        if(loginMutation.isSuccess){
+        if (loginMutation.isSuccess) {
             setOpen(false)
+            setIsAdmin(true)
+            sessionStorage.setItem(
+                "token",
+                loginMutation.data.data.token
+            )
         }
     }, [loginMutation.isSuccess])
 
-    const modal = () => {
+    const renderLoginModal = () => {
         return <Modal
             keepMounted
             open={open}
             onClose={handleClose}
-            aria-labelledby="keep-mounted-modal-title"
-            aria-describedby="keep-mounted-modal-description"
         >
             <Box sx={style}>
-                <Text
-                    variant={TypographyVariant.h6}
-                    text={"henhaochi.io"}
-                />
+                <Title />
                 {
                     loginMutation.isError && <StyledAlert severity="error">
                         Invalid Credentials
@@ -90,8 +97,9 @@ const NavBar = () => {
                 />
                 <LoginButton
                     variant="outlined"
-                    onClick={() => loginMutation.mutate()
-                }>Login</LoginButton>
+                    onClick={() => loginMutation.mutate()}>
+                    Login
+                </LoginButton>
             </Box>
         </Modal>
     }
@@ -128,20 +136,16 @@ const NavBar = () => {
     return (
         <Box sx={{ flexGrow: 1 }}>
             <Toolbar>
-                <Text
-                    variant={TypographyVariant.h6}
-                    text={"henhaochi.io"}
-                />
+                <Title />
                 <Box sx={{ flexGrow: 1 }} />
                 {
-                    loginMutation.isSuccess ?
+                    isAdmin ?
                         <Button color="inherit">Welcome Admin</Button> :
                         <Button color="inherit" onClick={handleOpen}>Login</Button>
                 }
-
             </Toolbar>
             {renderMobileMenu}
-            {modal()}
+            {renderLoginModal()}
         </Box>
     );
 }
