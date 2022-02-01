@@ -6,7 +6,8 @@ import { useContext, useMemo, useState } from 'react';
 import { Alert, Button, Modal, TextField } from '@mui/material';
 import { useLogin } from '../../hooks/api/useLogin';
 import Title from '../title';
-import { AdminContext, AdminType } from '../../contexts/admin_context';
+import { ProfileContext, ProfileType } from '../../contexts/profile_context';
+import { Role } from '../../entities/role';
 
 const StyledMenu = styled(Menu)({
     display: 'fixed'
@@ -52,13 +53,16 @@ const NavBar = () => {
         password
     )
 
-    const { isAdmin, setIsAdmin }
-        = useContext<AdminType>(AdminContext);
+    const { profile, setProfile }
+        = useContext<ProfileType>(ProfileContext);
 
     useMemo(() => {
         if (loginMutation.isSuccess) {
             setOpen(false)
-            setIsAdmin(true)
+            setProfile({
+                token: loginMutation.data.data.token,
+                role: loginMutation.data.data.role
+            })
             sessionStorage.setItem(
                 "token",
                 loginMutation.data.data.token
@@ -139,7 +143,7 @@ const NavBar = () => {
                 <Title />
                 <Box sx={{ flexGrow: 1 }} />
                 {
-                    isAdmin ?
+                    profile.role != null && profile.role == Role.ADMIN ?
                         <Button color="inherit">Welcome Admin</Button> :
                         <Button color="inherit" onClick={handleOpen}>Login</Button>
                 }

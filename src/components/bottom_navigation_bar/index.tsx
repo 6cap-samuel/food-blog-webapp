@@ -3,9 +3,10 @@ import { styled } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Fab from '@mui/material/Fab';
 import { Fragment, useContext } from 'react';
-import { AdminContext, AdminType } from '../../contexts/admin_context';
 import AddIcon from '@mui/icons-material/Add';
 import { Link } from 'react-router-dom';
+import { ProfileContext, ProfileType } from '../../contexts/profile_context';
+import { Role } from '../../entities/role';
 
 const StyledFab = styled(Fab)({
   position: 'absolute',
@@ -17,12 +18,12 @@ const StyledFab = styled(Fab)({
 });
 
 const BottomNavigationBar = () => {
-  const { isAdmin } =
-    useContext<AdminType>(AdminContext);
+  const { profile } =
+    useContext<ProfileType>(ProfileContext);
   return (
     <Fragment>
       {
-        isAdmin && <AppBar position="fixed" color="secondary" sx={{ top: 'auto', bottom: 0 }}>
+        profile.role != null && profile.role == Role.ADMIN && <AppBar position="fixed" color="secondary" sx={{ top: 'auto', bottom: 0 }}>
           <Toolbar>
             <Link
               to="/admin"

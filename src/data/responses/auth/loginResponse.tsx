@@ -1,7 +1,10 @@
+import { Role } from "../../../entities/role";
+
 export interface LoginResponseWrapper {
     data: LoginResponse
 }
 
 export interface LoginResponse {
-    token: string
+    token: string,
+    role: Role
 }

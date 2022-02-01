@@ -18,8 +18,8 @@ import { PostProvider } from './contexts/post_context';
 import Home from './screens/home';
 import { styled } from '@mui/system';
 import NavBar from './components/top_nav_bar';
-import { AdminProvider, RequireAuth } from './contexts/admin_context';
 import BottomNavigationBar from './components/bottom_navigation_bar/index';
+import { ProfileProvider, RequireAuth } from './contexts/profile_context';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -49,7 +49,7 @@ ReactDOM.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={darkTheme}>
-        <AdminProvider>
+        <ProfileProvider>
           <Wrapper>
             <BrowserRouter>
               <NavBar />
@@ -74,7 +74,7 @@ ReactDOM.render(
               <BottomNavigationBar />
             </BrowserRouter>
           </Wrapper>
-        </AdminProvider>
+        </ProfileProvider>
       </ThemeProvider>
     </QueryClientProvider>
   </React.StrictMode>,
