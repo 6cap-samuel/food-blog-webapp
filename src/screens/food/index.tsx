@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { useParams } from "react-router";
 import ConnectionError from "../../components/error/connection";
-import Post from "../../components/post";
+import {Post} from "../../components/post";
 import SkeletonLoader, { SkeletonType } from "../../components/skeleton_loader";
 import { PostDetailProvider } from "../../contexts/post_details_context";
 import { usePostDetails } from "../../hooks/api/usePostDetails";

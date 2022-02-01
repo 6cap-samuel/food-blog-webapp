@@ -20,6 +20,7 @@ import { styled } from '@mui/system';
 import NavBar from './components/top_nav_bar';
 import BottomNavigationBar from './components/bottom_navigation_bar/index';
 import { ProfileProvider, RequireAuth } from './contexts/profile_context';
+import AdminPostScreen from './screens/admin/posts/index';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -50,30 +51,29 @@ ReactDOM.render(
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={darkTheme}>
         <ProfileProvider>
-          <Wrapper>
-            <BrowserRouter>
-              <NavBar />
-              <Routes>
-                <Route path="/" element={
-                  <PostProvider>
+          <PostProvider>
+            <Wrapper>
+              <BrowserRouter>
+                <NavBar />
+                <Routes>
+                  <Route path="/" element={
                     <Home />
-                  </PostProvider>
-                } />
-                <Route path="/food">
-                  <Route path=":postId" element={<FoodScreen />} />
-                </Route>
-                <Route
-                  path="/admin"
-                  element={
-                    <RequireAuth>
-                      <AdminScreen />
-                    </RequireAuth>
-                  }
-                />
-              </Routes>
-              <BottomNavigationBar />
-            </BrowserRouter>
-          </Wrapper>
+                  } />
+                  <Route path="/food">
+                    <Route path=":postId" element={<FoodScreen />} />
+                  </Route>
+                  <Route path="/admin">
+                    <Route path="post" element={
+                      <RequireAuth>
+                        <AdminPostScreen />
+                      </RequireAuth>
+                    } />
+                  </Route>
+                </Routes>
+                <BottomNavigationBar />
+              </BrowserRouter>
+            </Wrapper>
+          </PostProvider>
         </ProfileProvider>
       </ThemeProvider>
     </QueryClientProvider>

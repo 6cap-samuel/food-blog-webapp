@@ -1,5 +1,5 @@
-import { Breadcrumbs, Button, Card, CardActions, CardContent, ImageList, ImageListItem, ImageListItemBar } from "@mui/material";
-import { styled, width } from "@mui/system";
+import { Breadcrumbs, Button, Card, CardActions, CardContent, CardMedia, ImageList, ImageListItem, ImageListItemBar, Rating } from "@mui/material";
+import { styled, typographyVariant, width } from "@mui/system";
 import { Img } from "react-progressive-loader";
 import Text, { TypographyVariant } from "../text";
 import PostReview from "./post_review";
@@ -10,6 +10,7 @@ import { Fragment, useContext } from "react";
 import { PostDetailContext } from "../../contexts/post_details_context";
 import { Link } from "react-router-dom";
 import { Food } from "../../entities/food";
+import Box from '@mui/material/Box';
 
 const StyledCard = styled(Card)({
     top: -30,
@@ -26,6 +27,10 @@ const StyledImg = styled(Img)({
 const StyledButton = styled(Button)({
     float: 'right',
     marginBottom: '13px'
+})
+
+const StyledAdminCard = styled(Card)({
+    marginTop: '10px'
 })
 
 const Post = () => {
@@ -120,11 +125,39 @@ const Post = () => {
 
                     }
                 </CardContent>
-
             </StyledCard>
         </Fragment>
-
     )
 }
 
-export default Post;
+const AdminPost = () => {
+    const postContext
+        = useContext(PostDetailContext)
+    return <Fragment>
+        <StyledAdminCard sx={{ display: 'flex' }}>
+            <CardMedia
+                component="img"
+                sx={{ width: 100, height: 100 }}
+                image={postContext.post.store.image_url}
+                alt={postContext.post.store.name}
+            />
+            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                <CardContent sx={{ flex: '1 0 auto' }}>
+                    <Text
+                        variant={TypographyVariant.h6}
+                        text={postContext.post.store.name}
+                    />
+                    <Rating
+                        name="size-small"
+                        defaultValue={0}
+                        size="small"
+                        value={postContext.post.rating}
+                    />
+                </CardContent>
+            </Box>
+        </StyledAdminCard>
+    </Fragment>
+}
+
+
+export { Post, AdminPost }

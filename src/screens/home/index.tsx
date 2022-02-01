@@ -1,7 +1,7 @@
 
 import { Fragment, useContext } from 'react';
 import SkeletonLoader, { SkeletonType } from '../../components/skeleton_loader';
-import Post from '../../components/post';
+import {Post} from '../../components/post';
 import ConnectionError from '../../components/error/connection';
 import EmptyDataset from '../../components/error/empty_dataset';
 import { styled } from '@mui/system';
