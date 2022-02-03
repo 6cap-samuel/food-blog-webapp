@@ -10,7 +10,6 @@ import '@fontsource/roboto/700.css';
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import FoodScreen from './screens/food';
-import AdminScreen from './screens/admin';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ThemeProvider } from '@emotion/react';
 import { createTheme } from '@mui/material';
@@ -21,6 +20,7 @@ import NavBar from './components/top_nav_bar';
 import BottomNavigationBar from './components/bottom_navigation_bar/index';
 import { ProfileProvider, RequireAuth } from './contexts/profile_context';
 import AdminPostScreen from './screens/admin/posts/index';
+import CreatePostScreen from './screens/admin/posts/create/index';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -68,6 +68,14 @@ ReactDOM.render(
                         <AdminPostScreen />
                       </RequireAuth>
                     } />
+                    <Route path="post">
+                      <Route
+                        path="create"
+                        element={
+                          <CreatePostScreen />
+                        }
+                      />
+                    </Route>
                   </Route>
                 </Routes>
                 <BottomNavigationBar />

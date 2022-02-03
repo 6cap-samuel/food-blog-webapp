@@ -87,7 +87,6 @@ const NavBar = () => {
                     required
                     id="outlined-required"
                     label="Email"
-                    defaultValue=""
                     value={username}
                     onChange={(a) => setUsername(a.target.value)}
                 />

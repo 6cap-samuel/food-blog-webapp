@@ -5,6 +5,7 @@ import { AdminPost } from "../../../components/post";
 import { PostContext } from "../../../contexts/post_context";
 import { PostDetailProvider } from "../../../contexts/post_details_context";
 import AddIcon from '@mui/icons-material/Add';
+import { Link } from "react-router-dom";
 
 const StyledContainer = styled(Container)({
     marginBottom: '70px'
@@ -20,18 +21,26 @@ const StyledChip = styled(Chip)({
     backgroundColor: 'white'
 })
 
+const StyledLink = styled(Link)({
+    textDecoration: 'none'
+})
+
 const AdminPostScreen = () => {
     const postContext
         = useContext(PostContext);
 
     return <Fragment>
         <StyledContainer>
-            <StyledPaper>
-                <StyledChip
-                    icon={<AddIcon />} 
-                    label="Add New Post"
-                />
-            </StyledPaper>
+            <StyledLink
+                to="/admin/post/create"
+            >
+                <StyledPaper>
+                    <StyledChip
+                        icon={<AddIcon />}
+                        label="Add New Post"
+                    />
+                </StyledPaper>
+            </StyledLink>
             {
                 postContext.postApiListing.data.data.data.map((post) => {
                     return <Fragment key={post.id}>

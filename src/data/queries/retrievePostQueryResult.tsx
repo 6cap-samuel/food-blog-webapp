@@ -5,6 +5,7 @@ import { RetrievePostDetailsResponseWrapper } from "../responses/posts/retrieveP
 import { RetrievePostResponseWrapper } from "../responses/posts/retrievePostResponse"
 import { LoginResponseWrapper } from "../responses/auth/loginResponse"
 import { TokenResponseWrapper } from '../responses/auth/tokenResponse';
+import { CreatePostResponseWrapper } from '../responses/posts/createPostResponse';
 
 export type RetrievePostDetailsQueryResult
     = QueryObserverResult<RetrievePostDetailsResponseWrapper | undefined, unknown>
@@ -17,3 +18,5 @@ export type RetrieveTokenQueryResult
 
 export type LoginMutationResult
     = UseMutationResult<LoginResponseWrapper | undefined, unknown, void, unknown>
+export type CreatePostMutationResult
+    = UseMutationResult<CreatePostResponseWrapper | undefined, unknown, void, unknown>
