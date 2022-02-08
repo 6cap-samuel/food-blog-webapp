@@ -1,16 +1,18 @@
-import { Breadcrumbs, Button, Card, CardActions, CardContent, CardMedia, ImageList, ImageListItem, ImageListItemBar, Rating } from "@mui/material";
-import { styled, typographyVariant, width } from "@mui/system";
+import { Button, Card, CardContent, CardMedia, Chip, Container, Paper, Rating } from "@mui/material";
+import { styled } from "@mui/system";
 import { Img } from "react-progressive-loader";
 import Text, { TypographyVariant } from "../text";
-import PostReview from "./post_review";
 import PostFoodList from "./post_food_list";
 import PostHashTags from "./post_hash_tags";
 import PostTitle from "./post_title";
 import { Fragment, useContext } from "react";
 import { PostDetailContext } from "../../contexts/post_details_context";
 import { Link } from "react-router-dom";
-import { Food } from "../../entities/food";
 import Box from '@mui/material/Box';
+import PostDescription from './post_description/index';
+import { ProfileContext } from "../../contexts/profile_context";
+import { Role } from "../../entities/role";
+import AddIcon from '@mui/icons-material/Add';
 
 const StyledCard = styled(Card)({
     top: -30,
@@ -33,64 +35,25 @@ const StyledAdminCard = styled(Card)({
     marginTop: '10px'
 })
 
+const StyledPaper = styled(Paper)({
+    textAlign: 'center',
+    paddingTop: 20,
+    paddingBottom: 20,
+    marginBottom: 10
+})
+
+const StyledChip = styled(Chip)({
+    backgroundColor: 'white'
+})
+
+const StyledLink = styled(Link)({
+    textDecoration: 'none'
+})
+
 const Post = () => {
 
     const postContext = useContext(PostDetailContext)
-
-    const renderImageListItem = (
-        item: Food
-    ) => {
-        return (<ImageListItem key={item.image_url}>
-            <StyledImg
-                src={item.image_url}
-                alt={item.name}
-                loadOnScreen={true}
-            />
-            <ImageListItemBar
-                title={item.name}
-                subtitle={<span>${item.cost}</span>}
-                position="below"
-            />
-        </ImageListItem>)
-    }
-
-    const renderImageList = () => {
-        return postContext.post.foods !== null &&
-            <ImageList sx={{ height: 250 }}>
-                {postContext.post.foods.map((item) => (
-                    renderImageListItem(item)
-                ))}
-            </ImageList>
-    }
-
-    const renderDetails = () => {
-        return (<Fragment>
-            <PostReview
-                title={"Positives"}
-                reviews={postContext.post.positives}
-            />
-            <PostReview
-                title={"Neutrals"}
-                reviews={postContext.post.neutrals}
-            />
-            <PostReview
-                title={"Negatives"}
-                reviews={postContext.post.negatives}
-            />
-            {
-                postContext.post.positives === null &&
-                postContext.post.neutrals === null &&
-                postContext.post.negatives === null &&
-                <Text
-                    variant={TypographyVariant.body2}
-                    text={postContext.post.description}
-                />
-            }
-            {
-                renderImageList()
-            }
-        </Fragment>)
-    }
+    const adminContext = useContext(ProfileContext)
 
     const generateDetailsButtonLink = () => {
         return (<Fragment>
@@ -117,7 +80,7 @@ const Post = () => {
                 <CardContent>
                     <PostTitle />
                     {
-                        postContext.isPostDetails ? renderDetails() : <PostFoodList />
+                        postContext.isPostDetails ? <PostDescription /> : <PostFoodList />
                     }
                     <PostHashTags />
                     {
